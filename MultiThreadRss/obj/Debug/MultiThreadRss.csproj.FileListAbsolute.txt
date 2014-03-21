@@ -1,0 +1,9 @@
+D:\MyProjects\ProjectsC#\MultiThreadRss\MultiThreadRss\bin\Debug\MultiThreadRss.exe.config
+D:\MyProjects\ProjectsC#\MultiThreadRss\MultiThreadRss\bin\Debug\MultiThreadRss.exe
+D:\MyProjects\ProjectsC#\MultiThreadRss\MultiThreadRss\bin\Debug\MultiThreadRss.pdb
+D:\MyProjects\ProjectsC#\MultiThreadRss\MultiThreadRss\obj\Debug\MultiThreadRss.csprojResolveAssemblyReference.cache
+D:\MyProjects\ProjectsC#\MultiThreadRss\MultiThreadRss\obj\Debug\MultiThreadRss.FormMain.resources
+D:\MyProjects\ProjectsC#\MultiThreadRss\MultiThreadRss\obj\Debug\MultiThreadRss.Properties.Resources.resources
+D:\MyProjects\ProjectsC#\MultiThreadRss\MultiThreadRss\obj\Debug\MultiThreadRss.csproj.GenerateResource.Cache
+D:\MyProjects\ProjectsC#\MultiThreadRss\MultiThreadRss\obj\Debug\MultiThreadRss.exe
+D:\MyProjects\ProjectsC#\MultiThreadRss\MultiThreadRss\obj\Debug\MultiThreadRss.pdb
