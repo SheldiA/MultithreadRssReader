@@ -52,7 +52,6 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="HtmlGenerator.cs" />
-    <Compile Include="ImageOfChanel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RssChannel.cs" />

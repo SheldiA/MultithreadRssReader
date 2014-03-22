@@ -11,17 +11,19 @@ namespace MultiThreadRss
     class RSSReader
     {
         private RssChannel rssChannel;
-        private ImageOfChanel imageChanel;
-        private RssItem[] articles;
+        private List<RssItem> articles;
         private string sourceName;
-        public RSSReader(string sourceName)
+        private List<string> filters;
+
+        public RSSReader(string sourceName,List<string> filters)
         {
             rssChannel = new RssChannel();
-            imageChanel = new ImageOfChanel();
             this.sourceName = sourceName;
+            articles = new List<RssItem>();
+            this.filters = filters;
         }
 
-        public RssItem[] GetItems()
+        public List<RssItem> GetItems()
         {
             try
             {
@@ -31,9 +33,8 @@ namespace MultiThreadRss
                 xmlTextReader.Close();
                 
                 XmlNode root = doc.DocumentElement;
-                articles = new RssItem[root.SelectNodes("channel/item").Count];
+                
                 XmlNodeList nodeList = root.ChildNodes;
-                int count = 0;
                 foreach(XmlNode channel in nodeList)
                 {
                     foreach(XmlNode channel_item in channel)
@@ -52,44 +53,28 @@ namespace MultiThreadRss
                             case "copyright":
                                 rssChannel.copyright = channel_item.InnerText;
                                 break;
-                            case "image":
-                                XmlNodeList imgList = channel_item.ChildNodes;
-                                foreach(XmlNode imgItem in imgList)
-                                {
-                                    switch(imgItem.Name)
-                                    {
-                                        case "url":
-                                            imageChanel.imgURL = imgItem.InnerText;
-                                            break;
-                                        case "link":
-                                            imageChanel.imgLink = imgItem.InnerText;
-                                            break;
-                                        case "title":
-                                            imageChanel.imgTitle = imgItem.InnerText;
-                                            break;
-                                    }
-                                }
-                                break;
+
                             case "item":
-                                XmlNodeList itemsList = channel_item.ChildNodes;                                
-                                articles[count] = new RssItem();
+                                XmlNodeList itemsList = channel_item.ChildNodes;
+                                RssItem currItem = new RssItem();
                                 foreach(XmlNode item in itemsList)
                                     switch(item.Name)
                                     {
                                         case "title":
-                                            articles[count].title = item.InnerText;
+                                            currItem.title = item.InnerText;
                                             break;
                                         case "link":
-                                            articles[count].link = item.InnerText;
+                                            currItem.link = item.InnerText;
                                             break;
                                         case "description":
-                                            articles[count].description = item.InnerText;
+                                            currItem.description = item.InnerText;
                                             break;
                                         case "pubDate":
-                                            articles[count].pubData = item.InnerText;
+                                            currItem.pubData = item.InnerText;
                                             break;
                                     }
-                                ++count;
+                                if(CheckFiltering(currItem))
+                                    articles.Add(currItem);
                                 break;
                         }
                     }
@@ -101,6 +86,20 @@ namespace MultiThreadRss
             }
 
             return articles;
+        }
+
+        private bool CheckFiltering(RssItem item)
+        {
+            bool result = true;
+
+            foreach(string str in filters)
+                if(!(item.title.Contains(str) || item.pubData.Contains(str)))
+                {
+                    result = false;
+                    break;
+                }
+
+            return result;
         }
 
     }
